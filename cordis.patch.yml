@@ -1,0 +1,21 @@
+# Mount the read-only companion next to dsh-cost-meter.
+#
+# It adds one sidebar-footer row ("今日按模型" / "Today by model") whose hover
+# tooltip splits today's cost per provider:model. It never writes the ledger and
+# never changes the main plugin's config, so it can be enabled or disabled
+# independently in the plugin panel.
+#
+# source:
+#   auto    (default) read the main plugin's in-memory statistics when available
+#           (zero lag, identical numbers), else fall back to the ledger file
+#   service always ask dsh-cost-meter (read-only data; its refresh() may flush the
+#           main plugin's own pending write a little earlier than its 2s debounce)
+#   file    strictly side-effect free: read ledger.json only (up to ~2s behind,
+#           which is exactly the main plugin's scheduleWrite debounce)
+# ledgerPath: absolute ledger path override; empty = the default cost-meter ledger.
+- insert:
+    - id: cost-meter-modeltip
+      name: 'dsh-cost-meter-modeltip'
+      config:
+        source: 'auto'
+        ledgerPath: ''
