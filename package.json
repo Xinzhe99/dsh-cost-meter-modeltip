@@ -1,6 +1,6 @@
 {
   "name": "dsh-cost-meter-modeltip",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "DeepSeek Harness read-only companion for dsh-cost-meter: a sidebar row that splits today's cost per provider:model, hovering for the full breakdown. Reads the main plugin's in-memory statistics when available so numbers track it exactly; never writes the ledger or the main plugin's config, and follows the main plugin's on/off state. | dsh-cost-meter 的只读伴生插件：侧边栏一行「今日按模型」，悬停看全部模型；优先读主插件内存统计保持同步，从不写账本、不改主插件配置，随主插件开关自动显隐。",
   "type": "module",
   "main": "./lib/index.js",

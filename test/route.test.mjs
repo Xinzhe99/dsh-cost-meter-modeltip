@@ -9,7 +9,13 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 const packageJson = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'))
-const { apply, localDayKey } = await import(new URL('../lib/index.js', import.meta.url))
+const mod = await import(new URL('../lib/index.js', import.meta.url))
+const { apply, localDayKey } = mod
+
+test('模块契约:必须声明 inject(漏声明会让 ctx.webServer 抛错、插件无法激活)', () => {
+  assert.ok(Array.isArray(mod.inject) && mod.inject.includes('webServer'), `inject 必须含 webServer,实际: ${JSON.stringify(mod.inject)}`)
+  assert.equal(mod.name, 'cost-meter-modeltip')
+})
 
 const today = localDayKey(Date.now())
 
